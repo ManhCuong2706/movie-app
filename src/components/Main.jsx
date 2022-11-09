@@ -6,16 +6,14 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const movie = movies[Math.floor(Math.random() * movies.length)];
 
-  useEffect(() => {
-    axios
-      .get(requests.requestPopular)
-      .then((res) => setMovies(res.data.results));
-  }, []);
-
-  console.log(movie);
-
   const truncateString = (str, num) =>
     str?.length > num ? str.slice(0, num) + '...' : str;
+
+  useEffect(() => {
+    axios.get(requests.requestOriginals).then((res) => {
+      setMovies(res.data.results);
+    });
+  }, []);
 
   return (
     <div className='w-full h-[550px] text-white'>

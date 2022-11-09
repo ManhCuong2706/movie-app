@@ -1,19 +1,29 @@
 import React, {useState} from 'react';
 import {FaHeart, FaRegHeart} from 'react-icons/fa';
+import MovieDetail from './MovieDetail';
 
-const Movie = ({item}) => {
-  const [like, setLike] = useState(false);
-
+const Movie = ({item, title, onMovieClick}) => {
+  const handleClick = (item) => {
+    if (!onMovieClick) return;
+    onMovieClick(item);
+  };
   return (
-    <div className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
+    <div
+      className={` w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px]  inline-block cursor-pointer relative p-2 hover:rounded-[6px]  transition-all delay-200 ease-linear hover:scale-110  ${
+        title === 'Originals' ? ' h-[400px]' : ''
+      }`}
+      onClick={() => {
+        handleClick(item);
+      }}
+    >
       <img
-        className='w-full 
-          h-full 
-          object-cover'
-        src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}
+        className='w-full h-full object-center rounded-[6px]'
+        src={`https://image.tmdb.org/t/p/w500/${
+          title === 'Originals' ? item?.poster_path : item?.backdrop_path
+        } `}
         alt={item?.title}
       />
-      <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
+      <div className='absolute bottom-0 left-0 w-full h-full hover:bg-black/75 opacity-0 hover:opacity-100  text-white m-2 overflow-hidden'>
         <p
           className='white-space-normal 
         text-xs 
@@ -25,12 +35,6 @@ const Movie = ({item}) => {
         >
           {item?.title}
         </p>
-
-        {like && <FaHeart className='absolute text-gray-300 top-4 left-4' />}
-
-        {!like && (
-          <FaRegHeart className='absolute text-gray-300 top-4 left-4' />
-        )}
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {FaSearch} from 'react-icons/fa';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {UserAuth} from '../context/AuthContext';
+import NavSearch from './NavSearch';
 
 const Navbar = () => {
   const {user, logOut} = UserAuth();
+  const [background, setBackground] = useState(false);
 
   const navigate = useNavigate();
 
@@ -18,22 +19,32 @@ const Navbar = () => {
     }
   };
 
-  console.log(user ? 'a' : 'b');
+  useEffect(() => {
+    const handleScroll = () => {
+      setBackground(window.scrollY >= 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <div className='sticky top-0 z-[1000]'>
-      <div className=' flex items-center justify-between p-2  absolute w-full'>
+    <div className='sticky top-0 z-[100] '>
+      <div
+        className={`flex items-center justify-between p-2  absolute w-full ${
+          background && 'bg-black'
+        }`}
+      >
         <div className='flex justify-between text-center items-center'>
           <Link to='/'>
             <h1 className='text-red-600 text-4xl font-bold cursor-pointer'>
               Movie App
             </h1>
           </Link>
-
-          <div className='text-white'>
-            <FaSearch className='text-[20px] ml-4 absolute top-[45%]' />
-          </div>
+          <NavSearch />
         </div>
+
         {!user ? (
           <div>
             <Link to='/login'>

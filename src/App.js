@@ -1,4 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
+import MovieDetail from './components/MovieDetail';
 import Navbar from './components/Navbar';
 import ProtectedRouter from './components/ProtectedRouter';
 import {AuthContextProvider} from './context/AuthContext';
@@ -24,6 +25,7 @@ function App() {
           }
         />
       </Routes>
+      <MovieDetail />
     </AuthContextProvider>
   );
 }

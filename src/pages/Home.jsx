@@ -7,11 +7,18 @@ const Home = () => {
   return (
     <div>
       <Main />
+      <Row rowID={6} title='Originals' fetchUrl={requests.requestOriginals} />
       <Row rowID={1} title='Upcoming' fetchUrl={requests.requestUpcoming} />
       <Row rowID={2} title='Popular' fetchUrl={requests.requestPopular} />
       <Row rowID={3} title='Horror' fetchUrl={requests.requestHorror} />
       <Row rowID={4} title='Top Rate' fetchUrl={requests.requestTopRated} />
       <Row rowID={5} title='Trending' fetchUrl={requests.requestTrending} />
+      <Row rowID={5} title='Comedy' fetchUrl={requests.requestComedy} />
+      <Row
+        rowID={5}
+        title='Documentaries'
+        fetchUrl={requests.requestDocumentaries}
+      />
     </div>
   );
 };
