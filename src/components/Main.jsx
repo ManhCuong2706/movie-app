@@ -29,7 +29,7 @@ const Main = () => {
         <img
           className='w-full 
           h-full 
-          object-contain'
+          object-cover'
           src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
           alt={movie?.title}
         />

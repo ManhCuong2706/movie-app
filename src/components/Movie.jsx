@@ -33,7 +33,7 @@ const Movie = ({item, title, onMovieClick}) => {
         items-center
         h-full text-center'
         >
-          {item?.title}
+          {item?.title || item?.name}
         </p>
       </div>
     </div>

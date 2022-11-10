@@ -41,7 +41,7 @@ const MovieDetail = (props) => {
           <iframe
             className='w-full h-full'
             src={video}
-            title={movie?.title}
+            title={movie?.title || movie?.name}
           ></iframe>
         </div>
       </div>

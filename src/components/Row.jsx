@@ -31,7 +31,8 @@ const Row = ({title, fetchUrl, rowID}) => {
     setMovie(item);
 
     axios.get(requests.requestTrailer(item?.id)).then((res) => {
-      setPath(res.data.homepage);
+      let movieList = res.data.videos.results;
+      if (!Array.isArray(movieList) || movieList.length === 0) setPath();
     });
   };
 
