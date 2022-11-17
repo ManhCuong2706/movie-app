@@ -6,7 +6,6 @@ import requests from '../Requests';
 const Home = () => {
   return (
     <div>
-      <Main />
       <Row rowID={6} title='Originals' fetchUrl={requests.requestOriginals} />
       <Row rowID={1} title='Trending' fetchUrl={requests.requestTrending} />
       <Row rowID={4} title='Top Rate' fetchUrl={requests.requestTopRated} />

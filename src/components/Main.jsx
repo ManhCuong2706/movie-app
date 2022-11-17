@@ -6,6 +6,7 @@ const Main = () => {
   const [movies, setMovies] = useState([]);
   const movie = movies[Math.floor(Math.random() * movies.length)];
 
+  // Limit string of over view
   const truncateString = (str, num) =>
     str?.length > num ? str.slice(0, num) + '...' : str;
 

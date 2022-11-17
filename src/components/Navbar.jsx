@@ -6,24 +6,27 @@ import NavSearch from './NavSearch';
 const Navbar = () => {
   const {user, logOut} = UserAuth();
   const [background, setBackground] = useState(false);
-
   const navigate = useNavigate();
 
+  // Handel logout function
   const handleLogOut = async () => {
     try {
       await logOut();
-      console.log('click');
+
       navigate('/');
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  // handel user scroll screen
   useEffect(() => {
     const handleScroll = () => {
       setBackground(window.scrollY >= 100);
     };
     window.addEventListener('scroll', handleScroll);
+
+    // clean up function
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

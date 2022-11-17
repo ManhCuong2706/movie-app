@@ -1,33 +1,31 @@
-import axios from 'axios';
-import React, {useRef, useState} from 'react';
+import React, {useContext, useRef} from 'react';
 import {MdSearch} from 'react-icons/md';
-import requests from '../Requests';
+import {useNavigate} from 'react-router-dom';
+import {SearchContext} from '../context/SearchContext';
 
 const NavSearch = () => {
-  const [inputValue, setInputValue] = useState('');
+  let inputValue = '';
   const typingRef = useRef(null);
+  const navigate = useNavigate();
+  const srContext = useContext(SearchContext);
 
+  // Handle input change function
   const handleInputChange = (e) => {
+    // will get input value when user stop typing after 200ms
+
     if (typingRef.current) clearTimeout(typingRef.current);
-
     typingRef.current = setTimeout(() => {
-      setInputValue(e.target.value);
-    }, 300);
-  };
-  console.log(inputValue);
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .get(requests.requestSearch(inputValue))
-      .then((res) => console.log(res));
+      inputValue = e.target.value;
+    }, 200);
   };
 
   return (
     <form
       className='text-white pr-1 flex  justify-end cursor-pointer '
       onSubmit={(e) => {
-        handleFormSubmit(e);
+        e.preventDefault();
+        srContext.onSubmit(inputValue);
+        navigate('/search');
       }}
     >
       <MdSearch className='text-[28px] ml-[10px] translate-x-8 translate-y-2 font-bold   text-slate-300 hover:text-white' />

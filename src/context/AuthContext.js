@@ -6,22 +6,27 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-
 import {setDoc, doc} from 'firebase/firestore';
 
+// Create Context
 const AuthContext = createContext();
 
+// Create provide function
 export function AuthContextProvider({children}) {
   const [user, setUser] = useState({});
 
+  // Handle sign up
   function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password);
     setDoc(doc(db, 'users', email), {saveShows: []});
   }
+
+  // Handle log in
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
+  // Handle log out
   function logOut() {
     return signOut(auth);
   }
