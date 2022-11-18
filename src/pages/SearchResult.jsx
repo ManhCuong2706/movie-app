@@ -20,10 +20,17 @@ const SearchResult = () => {
   return (
     <div className='relative top-[30px]'>
       <div className=''>
-        <h1 className='text-white font-bold text-2xl py-9 px-4'>
-          Search Result of {''}
-          <span className='text-teal-600'>{ctxSearch.keyword}</span>
-        </h1>
+        {movieList.length === 0 ? (
+          <h1 className='text-white font-bold text-2xl py-9 px-4'>
+            No results found for {''}
+            <span className='text-teal-600'>{ctxSearch.keyword}</span>
+          </h1>
+        ) : (
+          <h1 className='text-white font-bold text-2xl py-9 px-4'>
+            Search Result of {''}
+            <span className='text-teal-600'>{ctxSearch.keyword}</span>
+          </h1>
+        )}
       </div>
 
       <div className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative  flex flex-wrap justify-items-center'>
